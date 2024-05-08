@@ -27,4 +27,6 @@ The results suggest that GitHubCopilot was able to generate valid code with a 91
 - use an online learning environment called Coding Steps.
 - analysis shows consistently negative trends between the utilization of the AI Single Prompt approach and positive trends for the utilization of the Hybrid approach.
 
-        # Studying the effect of AI Code Generators on Supporting Novice Learners in Introductory Programming
+        # On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot
+- Used AppleScript to complete automation??
+- an empirical study on the robustness of code generation techniques
