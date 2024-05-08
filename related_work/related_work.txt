@@ -29,4 +29,8 @@ The results suggest that GitHubCopilot was able to generate valid code with a 91
 
         # On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot
 - Used AppleScript to complete automation??
-- an empirical study on the robustness of code generation techniques
+- an empirical study on the robustness of code-generation techniques
+
+         # Are Prompt Engineering and TODO Comments Friends or Foes? AnEvaluation on GitHub Copilot
+- analyzes a dataset consisting of 36,381 TODO comments and manually generate 1,140 code bodies using GitHub Copilot. The experiments show that GitHub Copilot can generate code with the symptoms of SATD, both prompted and unprompted.
+- used the Visual Studio Code IDE to manually generate Copilot generations for 380 samples
