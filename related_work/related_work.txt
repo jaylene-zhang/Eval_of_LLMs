@@ -2,7 +2,7 @@
 - a set of data and tools for evaluating LLM-guided IDE interactions, covering various programming scenarios and languages. Test GPT3.5 and GPT 4, and CodeLlama on the document generation and bug fixing scenarios using the an LLM powered chat extension in VSCode IDE.
 
 - Task 1. Bug fixing: assess whether the model fixed the original error, whether it created any new errors, and whether the model-modified code remained syntactically correct after the fix was inserted.
-result: GPT-4 tends to slightly outperform GPT-3.5, with Code Llama further behind.
+result: GPT-4 tends to slightly outperform GPT-3.5, with Code Llama further behind.。
 
 - Task 2. Code generation from NL: From each repository, we select the methods that are: 1) covered by the test cases in the given repository’s test suite, and 2) have a docstring. For each method, we ask an LLM to generate the body of the method given the method’s signature and docstring. We provide the contents of method’s file as context to the LLM, replacing the original method body with a commented line reading ”Your Code Here.”
 
