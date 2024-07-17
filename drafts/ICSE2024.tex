@@ -237,68 +237,50 @@ ChatGPT's capabilities and potential impact on computer science education.
 
 \section{Introduction}
 
-Large Language Models (LLMs) have made significant strides in various domains, including natural language processing, machine translation, and text summarization. Among these applications, the use of LLMs for program synthesis and generation has been particularly noteworthy. Projects such as OpenAI's Codex and DeepMind's AlphaCode have demonstrated the impressive ability of LLMs to generate code, showcasing their potential in automating programming tasks.
-
-
-Recently, LLMs have been evaluated in introductory programming courses that utilize languages like Java and Python. These studies have shown that LLMs can effectively generate programs, assisting students in writing and understanding code. However, the application of LLMs in the context of statically typed functional programming languages, such as OCaml, remains relatively unexplored.
-
-In this study, we evaluate ChatGPT's performance in an introductory functional language programming course that focuses on OCaml based on all homework assignments and exams from the 2022 fall semester.
-Our goal is to assess the grade that ChatGPT would receive on each assessment and overall in the course. To compare the model's performance to actual students enrolled in the course, we also rank its performance with respect to actual grade distributions in the course. 
-
-
-The objective of this research is to evaluate the effectiveness of LLMs in teaching statically typed functional programming. Specifically, we aim to investigate whether LLMs can autonomously solve programming assignments and tasks in OCaml. While previous research has focused on dynamically typed languages like Python and statically typed object-oriented languages like Java, there is a lack of studies on statically typed functional programming languages.
-
-Furthermore, we seek to understand if LLMs can repair code and provide useful feedback to students. This capability could position LLMs as valuable teaching assistants, offering immediate feedback on syntax, type, and logical errors in students' code. Exploring this potential aligns with broader educational goals, such as enhancing student learning experiences and providing additional support in programming courses.
-
-Understanding the capabilities of different LLMs in writing and fixing code is crucial for several reasons. It allows us to assess whether one LLM is more powerful than another—a question that has been studied for Python and Java but not for statically typed functional programming languages . Additionally, insights into how students can effectively use LLMs in a course can help instructors design programming exercises that promote academic integrity and prevent misuse of LLMs for cheating.
-
-Evaluating LLMs poses several challenges. We often lack knowledge about their training data, raising questions about the reproducibility of results. Additionally, the variability in LLM outputs can lead to inconsistent results, complicating the evaluation process. Moreover, equity and inclusion concerns arise, as the cost of evaluating LLMs may be prohibitive for some reviewers or instructors.
-
-Despite these challenges, our research aims to shed light on the practical and conceptual aspects of using LLMs for programming education, particularly in statically typed functional programming languages. By addressing these questions, we hope to contribute to the growing body of knowledge on LLMs and their potential to transform programming education.
-
-\section{Background(related work?)}
-
-% The development of language models has been a gradual process that has spanned several decades. Early efforts to develop computer systems capable of understanding natural language date back to the 1950s and 1960s, with researchers such as Joseph Weizenbaum and Alan Turing making significant contributions in the field of natural language processing (NLP).
-
-% \allen{Here we combine the original back and related work together.}
-
-In recent years, the development of large language models has accelerated with the advances in computing hardware such as GPU and TPU and the availability of vast amounts of training data. The success of these large language models is largely due to the transition in deep learning architecture from RNN (recurrent neural network) \cite{RNN} to Transformer models \cite{Transformer}. In fact, most successful large language models today such as BERT (Bidirectional Encoder Representations from Transformers) \cite{BERT} and the T5 (Text-to-Text Transfer Transformer) \cite{T5} are based on the Transformer. %Over the years, there has been a clear trend of large language models growing in size, accompanied by an increase in their capabilities. 
-
-% One of the most notable examples of this trend is the GPT (Generative Pre-trained Transformer) family of models developed by OpenAI. The first GPT model, GPT-1 \cite{GPT}, was released in 2018 and had 117 million parameters. This was followed by GPT-2 \cite{GPT-2} in 2019, which had 1.5 billion parameters and generated significant media attention due to its impressive language generation capabilities. GPT-3 \cite{GPT-3}, released in 2020, had a staggering 175 billion parameters and was described as a "breakthrough" in the field of natural language processing. 
-
-One of the most notable examples of this trend is the GPT (Generative Pre-trained Transformer) family of models developed by OpenAI. Early language models like GPT-1 \cite{GPT} had a relatively small number of parameters, but with the introduction of GPT-2 \cite{GPT-2} and GPT-3 \cite{GPT-3}, the size of language models has grown substantially. GPT-3, for instance, has 175 billion parameters, making it one of the largest language models to date. On the other hand, ChatGPT, an enhanced version of OpenAI's GPT-3, also referred to as GPT-3.5, has proven to outperform GPT-3 in almost every benchmark. With these large language models, we have seen significant improvements in natural language processing (NLP) tasks such as text generation, summarization, and translation. Additionally, the growing capabilities of large language models have enabled them to be used for various applications, including chatbots, virtual assistants, and even code generation. As the capabilities of these models continue to expand, we can expect to see further advancements in NLP and other areas of AI. 
-
-The increasing popularity of large language models such as ChatGPT is due to their ability to enable users to  interact with them via only natural language texts. Such ability is deeply linked to their capability of predicting the next word given prior words in a sentence. Since most natural language-related tasks can be framed as the next-word prediction, ChatGPT as well as other GPT models are expected to perform various tasks if they are well-engineered as prompts/instructions. Thus, it is well-expected that ChatGPT could perform differently when different prompt engineering techniques are used to guide its responses. With the right prompt engineering, ChatGPT can be used to perform a wide range of tasks, such as language translation, summarization, and even code generation. As a result, ChatGPT has the potential to become a valuable tool in various domains, from education to healthcare, as it can help users complete tasks and solve problems using only natural language inputs.
-
-When it comes to the impact of ChatGPT on computer science education, it is worth noting that the model's ability to understand and generate code represents a significant improvement over previous models. This breakthrough makes ChatGPT a tool that will transform computer science education.
-% It has the potential to  by providing a powerful platform for learning and teaching programming concepts. 
-As we have seen from previous work \cite{chen2021codex}, ChatGPT's predecessors
-are capable of understanding and generating code in commonly-used programming languages such as Python, Java, and C. Thus, in this study, we focus on evaluating and analyzing ChatGPT's performance in understanding concepts and generating code in OCaml - a functional programming language, in a real university course teaching environment. Subsequently, based on our empirical results, we aim to investigate how both students and instructors/TAs can benefit from ChatGPT. While there are potential merits to using ChatGPT in computer science education, we also discuss its limitations and potential risks.
-
-
-\subsection{Overview of The Course}
-Our study concerns students in a second-year undergraduate computer science course at X\footnote{The name is intentionally anonymized for the double-blind review.} university. The course introduces concepts about functional programming and programming paradigms. It is offered every semester with more than 300 registered undergraduate students. In this study, we use assignments and exam questions from Fall 2022, since ChatGPT is trained on data before 2021, so it is less likely that the model has seen those questions before.
-
-The course has ten weekly programming assignments each worth 3\%, a midterm exam worth 20\%, and a final exam worth 50\%   of the total grade. Table \ref{overview} presents a brief overview of the course content and related homework assignments. Each homework consists of several programming tasks to implement functions and test cases. All homework assignments were hosted on Learn-OCaml, an online programming platform for OCaml that allows students to edit, compile, test, and debug code all in one place. We used a modified version of Learn-OCaml \cite{10.1145/3341719} by Hameer and Pientka with additional features such as style checking and evaluation of test cases written by students.
+Large Language Models (LLMs) have made significant strides in various domains, including natural language processing, machine translation, and text summarization. Among these applications, the use of LLMs for program synthesis and generation has been particularly noteworthy. Projects such as OpenAI's Codex and DeepMind's AlphaCode have demonstrated the impressive ability of LLMs to generate code, showcasing their potential in automating programming tasks. Recent studies have extended this application to programming education. A experiment by \cite{6:3:380} reveals that learners with access to Codex during the training phase performed slightly better on the evaluation.
+The work by \cite{1555162} used the latest versions of ChatGPT, GitHub Copilot, and Amazon CodeWhisperer to generate Python code using the benchmark HumanEval Dataset, and they achieved 65.2\%, 46.3\%, and 31.1\% of the time, respectively. A study by \cite{2004:ITE:1009386.1010128} investigates how a pedagogically-designed LLM-based chatbot supports students’ debugging efforts in an introductory programming course. Their data revealed that students appreciated the content and experiential knowledge provided by the chatbot, but did not view it as a primary source for learning debugging strategies. Additionally, the research by \cite{6:1:1} used LLM not only for generating code, but also for fixing buggy codes. They found that LLMs tend to incorrectly use existing types or hallucinate entirely new types.
 
 
 
+However, the related research concerns particularly commonly used programming languages like Java and Python, which leads to a notable gap in research regarding the application of LLMs to statically typed functional programming languages, such as OCaml, which are often used in advanced programming courses. This study aims to address this gap by evaluating and comparing LLM performance in the context of OCaml programming education. Specifically, we investigate whether LLMs can solve OCaml programming assignments, and effectively repair faulty OCaml code. The significance of this research lies in its potential to provide insights into LLM capabilities in typed functional programming, allow comparison of different LLMs' performance in this paradigm, inform educators on effective LLM use in OCaml coursework, and guide the design of programming exercises that promote learning while maintaining academic integrity.
+
+
+
+Evaluating LLMs poses several challenges. We often lack knowledge about their training data, raising questions about the reproducibility of results. Additionally, the variability in LLM outputs can lead to inconsistent results, complicating the evaluation process. Moreover, equity and inclusion concerns arise, as the cost of evaluating LLMs may be prohibitive for some reviewers or instructors. Despite these challenges, our research aims to shed light on the practical and conceptual aspects of using LLMs for programming education, particularly in statically typed functional programming languages. By addressing these questions, we hope to contribute to the growing body of knowledge on LLMs and their potential to transform programming education.
+
+\section{Related work}
+
+2.1 GPT-4
+- Overview of GPT-4's capabilities
+- Studies on GPT-4's performance in code generation
+- Specific applications in programming education
+2.2 GitHub Copilot
+- Introduction to Copilot and its underlying technology
+- Evaluation of Copilot's effectiveness in code completion and generation
+- Impact on developer productivity and learning
+2.3 Code Llama
+- Overview of Code Llama and its specialized training
+- Comparative studies with other code-focused LLMs
+- Unique features relevant to programming tasks
+2.4 comparison of the thress
 
 \section{Method}
 
 
 % eval method
-To evaluate how effectively LLMs can fix errors, we conducted experiments using various LLMs in different scenarios: zero-shot and one-shot. In the zero-shot scenario, we provided the LLM with a faulty program and asked it to generate a corrected version without any prior examples. In the one-shot scenario, we first provided the LLM with a faulty program and its corrected version. Then, we presented another similar faulty program and asked the LLM to generate the corrected version.
+% To evaluate how effectively LLMs can fix errors, we conducted experiments using various LLMs in different scenarios: zero-shot and one-shot. In the zero-shot scenario, we provided the LLM with a faulty program and asked it to generate a corrected version without any prior examples. In the one-shot scenario, we first provided the LLM with a faulty program and its corrected version. Then, we presented another similar faulty program and asked the LLM to generate the corrected version.
 
-We identified similar programs by selecting faulty programs from a student's timeline, considering submissions either earlier or later in the course. This approach helped us evaluate the LLMs' ability to generalize error correction across different contexts.
+% We identified similar programs by selecting faulty programs from a student's timeline, considering submissions either earlier or later in the course. This approach helped us evaluate the LLMs' ability to generalize error correction across different contexts.
 
-For syntax errors, we randomly sampled 500 programs from student submissions, equally distributed among ten homework assignments (HW1-10) from Fall 2022. We used two modes for this evaluation: Mode A, where the prompt explicitly mentioned that the program contained a syntax error, and Mode B, where the prompt did not specify the type of error. We compared the results from Fall 2022 to those from Winter 2023 to validate the LLMs' performance.
+For syntax errors, we randomly sampled 500 programs from student submissions, equally distributed among ten homework assignments (HW1-10) from Fall 2022. 
 
-For type errors, we followed a similar approach, sampling 500 programs from Fall 2022 and comparing them with Winter 2023 submissions. Additionally, we identified "hard stuck states" with the help of an expert, Jerry, to assess the LLMs' ability to resolve more challenging type errors.
+% We used two modes for this evaluation: Mode A, where the prompt explicitly mentioned that the program contained a syntax error, and Mode B, where the prompt did not specify the type of error. 
 
-For logical errors, we again sampled 500 programs from Fall 2022 and compared them with Winter 2023 submissions. This evaluation helped us understand how well LLMs could address more complex and nuanced errors in student code.
+We compared the results from Fall 2022 to those from Winter 2023 to validate the LLMs' performance.
 
-We also evaluated the LLMs' capability to write complete programs by providing them with 100 different programming assignments and assessing their performance. We measured the pass rate as the percentage of assignments where the LLM generated a correct solution that passed all tests on the first try. Additionally, we evaluated the success rate over multiple attempts (k = 1, 5, 10), recording the maximum grade achieved across these attempts.
+We used the same sampling method for type errors and also looked at "hard stuck states" to test the LLMs on tougher errors. Logical errors were tested using the same sampling approach to see how well LLMs handle complex errors in student code.
+
+We also evaluated the LLMs' capability to write complete programs by providing them with 10 different programming assignments and assessing their performance. We measured the pass rate as the percentage of assignments where the LLM generated a correct solution that passed all tests on the first try. Additionally, we evaluated the success rate over multiple attempts (k = 1, 5, 10), recording the number of full grades achieved across these attempts.
 
 We used two different modes for this evaluation: no feedback, where the LLM generated solutions without any intermediate feedback, and compiler feedback, where the LLM received one round of feedback from a compiler, allowing it to refine its solution before the final evaluation. For each program generated by the LLM, we recorded the highest score achieved over the three attempts. This comprehensive evaluation helped us understand the LLMs' potential in generating correct and high-quality code.
 
