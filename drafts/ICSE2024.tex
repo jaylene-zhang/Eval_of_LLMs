@@ -169,10 +169,11 @@ dramatically impacting computer science education.
 %science education. 
 This paper aims to explore how well ChatGPT can perform in an
 introductory-level functional language programming course.  Our comprehensive evaluation provides valuable
-insights into ChatGPT's impact on both student and instructor
-perspectives. We also examine how ChatGPT can help instructors by offering explanations and support for a variety of problem types. Our findings suggest several benefits for both groups, including ChatGPT's potential to help students learn more effectively and to support instructors by providing customized educational materials. Overall, we believe that this
+insights into ChatGPT's impact from both student and instructor
+perspectives. Additionally, we identify several potential benefits
+that ChatGPT can offer to both groups. Overall, we believe that this
 study significantly clarifies and advances our understanding of
-ChatGPT's capabilities, which offers critical insights into its potential role as a pedagogical tool and as an aid for educators in reducing the challenges of teaching programming.
+ChatGPT's capabilities and potential impact on computer science education.
 \end{abstract}
 
 %%
@@ -234,66 +235,19 @@ ChatGPT's capabilities, which offers critical insights into its potential role a
 %% information and builds the first part of the formatted document.
 \maketitle
 
-\section{Introduction}
-
-Large Language Models (LLMs) have made significant strides in various domains, including natural language processing, machine translation, and text summarization. Among these applications, the use of LLMs for program synthesis and generation has been particularly noteworthy. Projects such as OpenAI's Codex and DeepMind's AlphaCode have demonstrated the impressive ability of LLMs to generate code, showcasing their potential in automating programming tasks. Recent studies have extended this application to programming education. When implemented responsibly and within appropriate contexts, these tools can function as valuable educational assets. For example, LLMs can offer immediate feedback on students' programming assignments and produce varied code samples to illustrate programming principles \cite{kumar2024impactguidanceinteractionstrategies}. An experiment by \cite{10.1145/3545945.3569830} reveals that learners with access to Codex during the training phase performed slightly better on the evaluation.
-The work by \cite{yetiştiren2023evaluatingcodequalityaiassisted} used the latest versions of ChatGPT, GitHub Copilot, and Amazon CodeWhisperer to generate Python code using the benchmark HumanEval Dataset, and they achieved 65.2\%, 46.3\%, and 31.1\% of the time, respectively. A study by \cite{10.1145/3544548.3580919} investigates how a pedagogically-designed LLM-based chatbot supports students’ debugging efforts in an introductory programming course. Their data revealed that students appreciated the content and experiential knowledge provided by the chatbot, but did not view it as a primary source for learning debugging strategies. Additionally, the research by \cite{6:1:1} used LLM not only for generating code, but also for fixing buggy codes. They found that LLMs tend to incorrectly use existing types or hallucinate entirely new types.
-
-
-
-However, the related research concerns particularly commonly used programming languages like Java and Python, which leads to a notable gap in research regarding the application of LLMs to statically typed functional programming languages, such as OCaml, which are often used in advanced programming courses. This study aims to address this gap by evaluating and comparing LLM performance in the context of OCaml programming education. Specifically, we investigate whether LLMs can solve OCaml programming assignments, and effectively repair faulty OCaml code. The significance of this research lies in its potential to provide insights into LLM capabilities in typed functional programming, allow comparison of different LLMs' performance in this paradigm, inform educators on effective LLM use in OCaml coursework, and guide the design of programming exercises that promote learning while maintaining academic integrity. Furthermore, as Generative AI gains prominence in industrial settings, introducing students to these technologies is becoming an increasingly vital component of computer science curricula. The integration of LLMs in education not only aids in teaching programming concepts but also prepares students for the evolving landscape of software development in professional environments.
+\input{intro}
+\input{related}
+\input{method}
+\input{results}
+\input{threats}
 
 
 
-Evaluating LLMs poses several challenges. We often lack knowledge about their training data, raising questions about the reproducibility of results. Additionally, the variability in LLM outputs can lead to inconsistent results, complicating the evaluation process. Moreover, equity and inclusion concerns arise, as the cost of evaluating LLMs may be prohibitive for some reviewers or instructors. Despite these challenges, our research aims to shed light on the practical and conceptual aspects of using LLMs for programming education, particularly in statically typed functional programming languages. By addressing these questions, we hope to contribute to the growing body of knowledge on LLMs and their potential to transform programming education.
 
 
 
-\section{Related work}
-
-Large Language Models (LLMs) have emerged as powerful tools in the field of software engineering, particularly in the domains of code generation and repair. These models, trained on vast corpora of code and natural language, have demonstrated remarkable capabilities in understanding and producing programming language syntax and semantics.
-
-Large language models (LLMs) for code generation refer to the use of LLM to generate source code from natural language descriptions, a process also known as a natural-language-to-code task. Typically, these natural language descriptions encompass programming problem statements (or docstrings) and may optionally include some programming context. Code generation has been a long-standing challenge in software engineering. LLMs have shown significant promise in this area, offering the potential to increase developer productivity and assist in rapid prototyping \cite{10.5555/3618408.3618894,wu2024repoformerselectiveretrievalrepositorylevel,DBLP:conf/acl/LuDHGHS22}. Similarly, code repair, which involves identifying and correcting errors in existing code, has seen advancements through the application of LLMs. These models can potentially detect both syntactic and semantic errors, suggesting corrections that adhere to best practices and maintain code consistency \cite{DBLP:conf/icse/JiangL021, parasaram2024factselectionproblemllmbased, olausson2024selfrepairsilverbulletcode}. Prenner et al. \cite{10.1145/3524459.3527351} conducted a small-scale evaluation for the Codex model on a simple dataset containing both Java and Python versions of buggy algorithm implementations. Codex is given the buggy function and by using prompt engineering, are then asked to generate a complete fixed function. The results show that Codex is competitive with state-of-the-art learning-based APR tools in Python but worse in Java. In contrast, we show that by using our repair settings, LLMs are able to outperform state-of-the-art APR tools on both Java and Python. Kolak et al. \cite{osti_10340618} also used Codex along with 2 smaller LLMs and evaluated their ability to generate the correct patch line when given the code prefix on the same dataset as the previous work [32]. The evaluation demonstrated the scaling effect of LLMs where the repair results can be improved by using larger models.
-
-The importance of these capabilities extends beyond professional software development into the realm of programming education. LLMs capable of generating and repairing code could serve as powerful educational tools, providing instant feedback to students, assisting in debugging, and offering explanations for complex programming concepts \cite{10.1145/3597503.3639219, 10.1145/3544548.3580919, 10.1145/3631802.3631806, 10.1145/3613904.3642706, jury2024evaluating}. In addition, Kiesler and Schiffner \cite{kiesler2023largelanguagemodelsintroductory} assessed the capabilities of ChatGPT-3.5 and GPT-4 in solving introductory Python programming tasks sourced from CodingBat. Supporting discussions on LLMs’ application in programming education, particularly with development assistants, additional references such as Asare et al. \cite{10.1007/s10664-023-10380-1}, Pearce et al. \cite{DBLP:conf/sp/PearceA0DK22} and Dakhel et al. \cite{DBLP:journals/jss/DakhelMNKDJ23} provide insights into the integration of AI tools within software development environments. These studies collectively underscore the transformative impact of LLMs on programming education, suggesting avenues for future research in optimizing their use for educational enhancement
 
 
-\section{Method}
-
-
-% eval method
-% To evaluate how effectively LLMs can fix errors, we conducted experiments using various LLMs in different scenarios: zero-shot and one-shot. In the zero-shot scenario, we provided the LLM with a faulty program and asked it to generate a corrected version without any prior examples. In the one-shot scenario, we first provided the LLM with a faulty program and its corrected version. Then, we presented another similar faulty program and asked the LLM to generate the corrected version.
-
-% We identified similar programs by selecting faulty programs from a student's timeline, considering submissions either earlier or later in the course. This approach helped us evaluate the LLMs' ability to generalize error correction across different contexts.
-
-For syntax errors, we randomly sampled 500 programs from student submissions, equally distributed among ten homework assignments (HW1-10) from Fall 2022. 
-
-% We used two modes for this evaluation: Mode A, where the prompt explicitly mentioned that the program contained a syntax error, and Mode B, where the prompt did not specify the type of error. 
-
-We compared the results from Fall 2022 to those from Winter 2023 to validate the LLMs' performance.
-
-We used the same sampling method for type errors and also looked at "hard stuck states" to test the LLMs on tougher errors. Logical errors were tested using the same sampling approach to see how well LLMs handle complex errors in student code.
-
-We also evaluated the LLMs' capability to write complete programs by providing them with 10 different programming assignments and assessing their performance. We measured the pass rate as the percentage of assignments where the LLM generated a correct solution that passed all tests on the first try. Additionally, we evaluated the success rate over multiple attempts (k = 1, 5, 10), recording the number of full grades achieved across these attempts.
-
-We used two different modes for this evaluation: no feedback, where the LLM generated solutions without any intermediate feedback, and compiler feedback, where the LLM received one round of feedback from a compiler, allowing it to refine its solution before the final evaluation. For each program generated by the LLM, we recorded the highest score achieved over the three attempts. This comprehensive evaluation helped us understand the LLMs' potential in generating correct and high-quality code.
-
-By conducting these evaluations, we aimed to gain insights into the strengths and limitations of different LLMs in both error correction and program generation tasks, particularly in the context of teaching statically typed functional programming languages like OCaml.
-\section{Evaluation}
-
-\section{Threats To Validity}
-In our evaluation, we assume that the LLMs are already fully trained and that no additional re-training or learning occurs during the evaluation process. This assumption is crucial because it impacts the validity and reproducibility of our results. If any form of additional learning were to take place during the evaluation, it could skew the outcomes and lead to an overestimation of the LLMs' capabilities.
-
-Furthermore, the variability in LLM outputs poses a challenge to the consistency of our findings. Since LLMs can produce different results given the same input on different occasions, this variability must be accounted for in our analysis. We mitigate this by averaging results over multiple runs, but inherent unpredictability remains a concern.
-
-Another threat to validation arises from the unknown nature of the training data used to develop the LLMs. Without detailed knowledge of the datasets and the specific programming tasks the LLMs were exposed to during training, it is difficult to ascertain whether the models have been inadvertently trained on similar tasks or even specific examples present in our evaluation dataset. This could result in biased performance metrics that do not accurately reflect the models' generalization capabilities.
-
-Additionally, the evaluation process itself could introduce biases. For example, the selection of faulty programs and the criteria for what constitutes a "similar" program may affect the outcomes. We have attempted to mitigate this by using a random sampling approach and defining clear criteria for similarity, but subjective decisions are unavoidable.
-
-The cost and accessibility of running extensive evaluations with LLMs also present equity and inclusion concerns. Not all researchers or educators may have the resources to replicate our study, which could limit the generalizability and applicability of our findings across different contexts.
-
-
-\section{Citations}
 
 \section{Appendices}
 
@@ -320,8 +274,6 @@ and subsection identification method.
 %%
 %% If your work has an appendix, this is the place to put it.
 \appendix
-
-\section{Research Methods}
 
 
 \end{document}

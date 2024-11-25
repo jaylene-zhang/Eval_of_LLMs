@@ -211,22 +211,7 @@
       url={https://arxiv.org/abs/2304.10778}, 
 }
 
-@inproceedings{10.1145/3597503.3639219,
-author = {Du, Xueying and Liu, Mingwei and Wang, Kaixin and Wang, Hanlin and Liu, Junwei and Chen, Yixuan and Feng, Jiayi and Sha, Chaofeng and Peng, Xin and Lou, Yiling},
-title = {Evaluating Large Language Models in Class-Level Code Generation},
-year = {2024},
-isbn = {9798400702174},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3597503.3639219},
-doi = {10.1145/3597503.3639219},
-booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
-articleno = {81},
-numpages = {13},
-keywords = {class-level code generation, large language model, benchmark},
-location = {Lisbon, Portugal},
-series = {ICSE '24}
-}
+
 
 @inproceedings{NEURIPS2023_43e9d647,
  author = {Liu, Jiawei and Xia, Chunqiu Steven and Wang, Yuyao and ZHANG, LINGMING},
@@ -317,16 +302,36 @@ location = {Toronto ON, Canada},
 series = {SIGCSE 2023}
 }
 
+% alphacode
+@INPROCEEDINGS{9978175,
+  author={Lertbanjongngam, Sila and Chinthanet, Bodin and Ishio, Takashi and Kula, Raula Gaikovina and Leelaprute, Pattara and Manaskasemsak, Bundit and Rungsawang, Arnon and Matsumoto, Kenichi},
+  booktitle={2022 IEEE 16th International Workshop on Software Clones (IWSC)}, 
+  title={An Empirical Evaluation of Competitive Programming AI: A Case Study of AlphaCode}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={10-15},
+  keywords={Codes;Conferences;Natural languages;Cloning;Manuals;Programming;Licenses;code generation;code similarity;code performance},
+  doi={10.1109/IWSC55060.2022.00010}}
+
 
 % codex
-@misc{chen2021evaluatinglargelanguagemodels,
-      title={Evaluating Large Language Models Trained on Code}, 
-      author={Mark Chen and Jerry Tworek and Heewoo Jun and Qiming Yuan and Henrique Ponde de Oliveira Pinto and Jared Kaplan and Harri Edwards and Yuri Burda and Nicholas Joseph and Greg Brockman and Alex Ray and Raul Puri and Gretchen Krueger and Michael Petrov and Heidy Khlaaf and Girish Sastry and Pamela Mishkin and Brooke Chan and Scott Gray and Nick Ryder and Mikhail Pavlov and Alethea Power and Lukasz Kaiser and Mohammad Bavarian and Clemens Winter and Philippe Tillet and Felipe Petroski Such and Dave Cummings and Matthias Plappert and Fotios Chantzis and Elizabeth Barnes and Ariel Herbert-Voss and William Hebgen Guss and Alex Nichol and Alex Paino and Nikolas Tezak and Jie Tang and Igor Babuschkin and Suchir Balaji and Shantanu Jain and William Saunders and Christopher Hesse and Andrew N. Carr and Jan Leike and Josh Achiam and Vedant Misra and Evan Morikawa and Alec Radford and Matthew Knight and Miles Brundage and Mira Murati and Katie Mayer and Peter Welinder and Bob McGrew and Dario Amodei and Sam McCandlish and Ilya Sutskever and Wojciech Zaremba},
-      year={2021},
-      eprint={2107.03374},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2107.03374}, 
+@inproceedings{10.1145/3597503.3639219,
+author = {Du, Xueying and Liu, Mingwei and Wang, Kaixin and Wang, Hanlin and Liu, Junwei and Chen, Yixuan and Feng, Jiayi and Sha, Chaofeng and Peng, Xin and Lou, Yiling},
+title = {Evaluating Large Language Models in Class-Level Code Generation},
+year = {2024},
+isbn = {9798400702174},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3597503.3639219},
+doi = {10.1145/3597503.3639219},
+abstract = {Recently, many large language models (LLMs) have been proposed, showing advanced proficiency in code generation. Meanwhile, many efforts have been dedicated to evaluating LLMs on code generation benchmarks such as HumanEval. Although being very helpful for comparing different LLMs, existing evaluation focuses on a simple code generation scenario (i.e., function-level or statement-level code generation), which mainly asks LLMs to generate one single code unit (e.g., a function or a statement) for the given natural language description. Such evaluation focuses on generating independent and often small-scale code units, thus leaving it unclear how LLMs perform in real-world software development scenarios.To fill this knowledge gap, we make the first attempt to evaluate LLMs in a more challenging code generation scenario, i.e., class-level code generation. Compared with existing code generation benchmarks, it better reflects real-world software development scenarios due to it comprising broader contextual dependencies and multiple, interdependent units of code. We first manually construct the first class-level code generation benchmark ClassEval of 100 class-level Python code generation tasks with approximately 500 person-hours. Based on the new benchmark ClassEval, we then perform the first study of 11 state-of-the-art LLMs on class-level code generation. Based on our results, we find that all LLMs perform much worse on class-level code generation compared to the method-level. While GPT models still dominate other LLMs on class-level code generation, the performance rankings of other models on method-level code generation no longer holds for class-level code generation. Besides, most models (except GPT models) perform better when generating the class method by method; and they have the limited ability of generating dependent code. Based on our findings, we call for software engineering (SE) researchers' expertise to build more LLM benchmarks based on practical and complicated software development scenarios.},
+booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
+articleno = {81},
+numpages = {13},
+keywords = {class-level code generation, large language model, benchmark},
+location = {Lisbon, Portugal},
+series = {ICSE '24}
 }
 
 @inproceedings{10.1145/3558489.3559072,
@@ -625,4 +630,121 @@ keywords = {language models, software engineering, code security, copilot}
       archivePrefix={arXiv},
       primaryClass={cs.HC},
       url={https://arxiv.org/abs/2310.13712}, 
+}
+
+
+
+@INPROCEEDINGS{10196869,
+  author={Feng, Yunhe and Vanam, Sreecharan and Cherukupally, Manasa and Zheng, Weijian and Qiu, Meikang and Chen, Haihua},
+  booktitle={2023 IEEE 47th Annual Computers, Software, and Applications Conference (COMPSAC)}, 
+  title={Investigating Code Generation Performance of ChatGPT with Crowdsourcing Social Data}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={876-885},
+  keywords={Codes;Social networking (online);Debugging;Chatbots;Software;Task analysis;Interviews;ChatGPT;Coding Generation;Software Engineering;Large Language Models (LLMs);Generative Models;Social Media},
+  doi={10.1109/COMPSAC57700.2023.00117}}
+
+
+
+@inproceedings{Chen2023GPTutorAC,
+  title={GPTutor: a ChatGPT-powered programming tool for code explanation},
+  author={Eason Chen and Ray Huang and Hanze Chen and Yuen-Hsien Tseng and Liang-Yi Li},
+  booktitle={International Conference on Artificial Intelligence in Education},
+  year={2023},
+  url={https://api.semanticscholar.org/CorpusID:258461009}
+}
+
+@article{article,
+author = {Surameery, Nigar and Shakor, Mohammed},
+year = {2023},
+month = {01},
+pages = {17-22},
+title = {Use Chat GPT to Solve Programming Bugs},
+journal = {International Journal of Information technology and Computer Engineering},
+doi = {10.55529/ijitc.31.17.22}
+}
+
+@inproceedings{10.1145/3639474.3640076,
+author = {Xue, Yuankai and Chen, Hanlin and Bai, Gina R. and Tairas, Robert and Huang, Yu},
+title = {Does ChatGPT Help With Introductory Programming?An Experiment of Students Using ChatGPT in CS1},
+year = {2024},
+isbn = {9798400704987},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3639474.3640076},
+doi = {10.1145/3639474.3640076},
+pages = {331–341},
+numpages = {11},
+keywords = {CS education, CS1, generative AI, ChatGPT, OOP},
+location = {Lisbon, Portugal},
+series = {ICSE-SEET '24}
+}
+
+@misc{hicke2023aitaintelligentquestionanswerteaching,
+      title={AI-TA: Towards an Intelligent Question-Answer Teaching Assistant using Open-Source LLMs}, 
+      author={Yann Hicke and Anmol Agarwal and Qianou Ma and Paul Denny},
+      year={2023},
+      eprint={2311.02775},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2311.02775}, 
+}
+
+
+@misc{anishka2024chatgptplayroleteaching,
+      title={Can ChatGPT Play the Role of a Teaching Assistant in an Introductory Programming Course?}, 
+      author={Anishka and Atharva Mehta and Nipun Gupta and Aarav Balachandran and Dhruv Kumar and Pankaj Jalote},
+      year={2024},
+      eprint={2312.07343},
+      archivePrefix={arXiv},
+      primaryClass={cs.HC},
+      url={https://arxiv.org/abs/2312.07343}, 
+}
+
+
+
+
+
+
+
+% citations for LRL
+%
+%
+@misc{deng2024assessingcodegenerationintermediate,
+      title={Assessing Code Generation with Intermediate Languages}, 
+      author={Xun Deng and Sicheng Zhong and Honghua Dong and Jingyu Hu and Sidi Mohamed Beillahi and Xujie Si and Fan Long},
+      year={2024},
+      eprint={2407.05411},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2407.05411}, 
+}
+
+@misc{mora2024syntheticprogrammingelicitationtexttocode,
+      title={Synthetic Programming Elicitation for Text-to-Code in Very Low-Resource Programming and Formal Languages}, 
+      author={Federico Mora and Justin Wong and Haley Lepe and Sahil Bhatia and Karim Elmaaroufi and George Varghese and Joseph E. Gonzalez and Elizabeth Polgreen and Sanjit A. Seshia},
+      year={2024},
+      eprint={2406.03636},
+      archivePrefix={arXiv},
+      primaryClass={cs.PL},
+      url={https://arxiv.org/abs/2406.03636}, 
+}
+
+@article{10.1145/3689735,
+author = {Cassano, Federico and Gouwar, John and Lucchetti, Francesca and Schlesinger, Claire and Freeman, Anders and Anderson, Carolyn Jane and Feldman, Molly Q and Greenberg, Michael and Jangda, Abhinav and Guha, Arjun},
+title = {Knowledge Transfer from High-Resource to Low-Resource Programming Languages for Code LLMs},
+year = {2024},
+issue_date = {October 2024},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {8},
+number = {OOPSLA2},
+url = {https://doi.org/10.1145/3689735},
+doi = {10.1145/3689735},
+journal = {Proc. ACM Program. Lang.},
+month = oct,
+articleno = {295},
+numpages = {32},
+keywords = {Large Language Models trained on Code}
 }

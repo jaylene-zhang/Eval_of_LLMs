@@ -1,0 +1,34 @@
+\section{Method}
+
+% eval method
+% To evaluate how effectively LLMs can fix errors, we conducted experiments using various LLMs in different scenarios: zero-shot and one-shot. In the zero-shot scenario, we provided the LLM with a faulty program and asked it to generate a corrected version without any prior examples. In the one-shot scenario, we first provided the LLM with a faulty program and its corrected version. Then, we presented another similar faulty program and asked the LLM to generate the corrected version.
+
+% We identified similar programs by selecting faulty programs from a student's timeline, considering submissions either earlier or later in the course. This approach helped us evaluate the LLMs' ability to generalize error correction across different contexts.
+
+% For syntax errors, we randomly sampled 500 programs from student submissions, equally distributed among ten homework assignments (HW1-10) from Fall 2022. 
+
+
+% We also evaluated the LLMs' capability to write complete programs by providing them with 10 different programming assignments and assessing their performance. We measured the pass rate as the percentage of assignments where the LLM generated a correct solution that passed all tests on the first try. Additionally, we evaluated the success rate over multiple attempts (k = 1, 5, 10), recording the number of full grades achieved across these attempts.
+
+% By conducting these evaluations, we aimed to gain insights into the strengths and limitations of different LLMs in both error correction and program generation tasks, particularly in the context of teaching statically typed functional programming languages like OCaml.
+
+
+Under the subsections below, we elaborate on our methodology. Section 3.1 gives details about how we evaluate LLMs in generating solutions for programming questions, as well as how LLMs perform in repairing the buggy codes selected from student homework. The assignment questions consist of 10 homework from fall 2022. Section 3.2 describes how we classify the conceptual questions chosen from the midterm and final exams into various categories and presents the responses from LLMs for these questions.    
+
+
+\subsection{Evaluation on programming questions}
+
+% TAs to perform manual grading here
+% describe the content of assignment questions
+% details of problem description
+
+One of the most popular downstream tasks for code modeling is code generation given a
+natural language description. We prompt the model with the same question description as students would see, and ask the models to generate the solution for each programming question with zero-shot learning. Each solution is first graded by the auto-grader, where it is considered correct if it passes all test cases. The maximum grade during the five trials is recorded. Then we also conduct a manual inspection for each solution to check if the style meets our requirements. Typical style issues include not implementing the program tail-recursively, not using HOFs(higher-order functions), or developing imperative language features. We rate the code from 1,2,3 or 4, each corresponding to beginner, developing, proficient, and mastery.
+
+To assess the effectiveness of LLMs in error correction, we conduct experiments in a zero-shot scenario using faulty programs. Here, the LLM is presented with a faulty program with the existing error type and asked to provide a corrected version without prior examples. The faulty programs are sampled from student homework submissions and equally distributed among 10 assignments. Errors in these programs are divided into 3 types based on the compiler message: type error, syntax error, and logical error, where there are 500 programs for each error type (a total of 1500 programs). 
+
+% e.g. binding stack
+\subsection{Evaluation on conceptual questions}
+
+To get a better sense of LLMs' ability to understand the underlying logic of functional programming, we also conduct experiments on conceptual questions. In contrast to programming exercises which are designed to build practical skills in implementing concepts through code, conceptual questions typically focus on assessing a student's understanding of fundamental principles and theories, and they often require explanations, proofs, or high-level reasoning. We categorize the conceptual questions from midterm and final exams into five groups: Long answer, Dynamics(evaluations), Type inference, Statics(variable binding, unused variables, substitution/overshadowing), and Induction proof. Following the method described in Section 3.1, we input the model with exam questions and repeat the process 5 times. Here we explicitly specify that the questions are related to OCaml. Additionally, for solutions that require a specific type of structure, we provide an example to guide the model, as it otherwise lacks prior knowledge of the required format. For this part, we also rate the solutions from beginner, developing, proficient, and mastery.
+

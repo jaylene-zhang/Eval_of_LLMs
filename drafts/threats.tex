@@ -1,0 +1,11 @@
+\section{Threats To Validity}
+In our evaluation, we assume that the LLMs are already fully trained and that no additional re-training or learning occurs during the evaluation process. This assumption is crucial because it impacts the validity and reproducibility of our results. If any form of additional learning were to take place during the evaluation, it could skew the outcomes and lead to an overestimation of the LLMs' capabilities.
+
+Furthermore, the variability in LLM outputs poses a challenge to the consistency of our findings. Since LLMs can produce different results given the same input on different occasions, this variability must be accounted for in our analysis. We mitigate this by averaging results over multiple runs, but inherent unpredictability remains a concern.
+
+Another threat to validation arises from the unknown nature of the training data used to develop the LLMs. Without detailed knowledge of the datasets and the specific programming tasks the LLMs were exposed to during training, it is difficult to ascertain whether the models have been inadvertently trained on similar tasks or even specific examples present in our evaluation dataset. This could result in biased performance metrics that do not accurately reflect the models' generalization capabilities.
+
+Additionally, the evaluation process itself could introduce biases. For example, the selection of faulty programs and the criteria for what constitutes a "similar" program may affect the outcomes. We have attempted to mitigate this by using a random sampling approach and defining clear criteria for similarity, but subjective decisions are unavoidable.
+
+The cost and accessibility of running extensive evaluations with LLMs also present equity and inclusion concerns. Not all researchers or educators may have the resources to replicate our study, which could limit the generalizability and applicability of our findings across different contexts.
+
