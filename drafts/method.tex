@@ -13,7 +13,10 @@
 % By conducting these evaluations, we aimed to gain insights into the strengths and limitations of different LLMs in both error correction and program generation tasks, particularly in the context of teaching statically typed functional programming languages like OCaml.
 
 
-Under the subsections below, we elaborate on our methodology. Section 3.1 gives details about how we evaluate LLMs in generating solutions for programming questions, as well as how LLMs perform in repairing the buggy codes selected from student homework. The assignment questions consist of 10 homework from fall 2022. Section 3.2 describes how we classify the conceptual questions chosen from the midterm and final exams into various categories and then feed into LLMs as well. We interact with CodeLlama on a GPU and the other LLMs via OpenAI API.
+
+
+Under the subsections below, we elaborate on our methodology. Section 3.1 gives details about how we evaluate LLMs in generating solutions for programming questions, as well as how LLMs perform in repairing the buggy codes selected from student homework. The assignment questions consist of 10 homework from fall 2022. Section 3.2 describes how we classify the conceptual questions chosen from the midterm and final exams into various categories and then feed into LLMs as well. We interact with all of the LLMs via OpenAI and OpenRouter APIs.
+
 
 \subsection{Evaluation on programming questions}
 
@@ -21,13 +24,117 @@ Under the subsections below, we elaborate on our methodology. Section 3.1 gives 
 % describe the content of assignment questions
 % details of problem description
 
-One of the most popular downstream tasks for code modeling is code generation given a
-natural language description. We prompt the model with the same question description as students would see, and ask the models to generate the solution for each programming question with zero-shot learning. Each solution is first graded by the auto-grader, where it is considered correct if it passes all test cases. The maximum grade during the five trials is recorded. Then we also conduct a manual inspection for each solution to check if the style meets our requirements. Typical style issues include not implementing the program tail-recursively, not using HOFs(higher-order functions), or developing imperative language features. We rate the code from 1,2,3 or 4, each corresponding to beginner, developing, proficient, and mastery.
+One of the most popular downstream tasks for code modeling is code generation given a natural language description. We prompt the model with the same question description as students would see, and ask the models to generate the solution for each programming question with zero-shot learning. Each solution is first graded by the auto-grader, where it is considered correct if it passes all test cases. The maximum grade during the five trials is recorded. Then we also conduct a manual inspection for each solution to check if the style meets our requirements. Typical style issues include not implementing the program tail-recursively, not using HOFs(higher-order functions), or developing imperative language features. We rate the code from 1,2,3 or 4, each corresponding to beginner, developing, proficient, and mastery.
 
 To assess the effectiveness of LLMs in error correction, we conduct experiments in a zero-shot scenario using faulty programs. Here, the LLM is presented with a faulty program with the existing error type and asked to provide a corrected version without prior examples. The faulty programs are sampled from student homework submissions and equally distributed among 10 assignments. Errors in these programs are divided into 3 types based on the compiler message: type error, syntax error, and logical error, where there are 500 programs for each error type (a total of 1500 programs). 
 
 % e.g. binding stack
 \subsection{Evaluation on conceptual questions}
 
-To get a better sense of LLMs' ability to understand the underlying logic of functional programming, we also conduct experiments on conceptual questions. In contrast to programming exercises which are designed to build practical skills in implementing concepts through code, conceptual questions typically focus on assessing a student's understanding of fundamental principles and theories, and they often require explanations, proofs, or high-level reasoning. We categorize the conceptual questions from midterm and final exams into five groups: Long answer, Dynamics(evaluations), Type inference, Statics(variable binding, unused variables, substitution/overshadowing), and Induction proof. Following the method described in Section 3.1, we input the model with exam questions and repeat the process 5 times. Here we explicitly specify that the questions are related to OCaml. Additionally, for solutions that require a specific type of structure, we provide an example to guide the model, as it otherwise lacks prior knowledge of the required format. For this part, we also rate the solutions from beginner, developing, proficient, and mastery.
+To get a better sense of LLMs' ability to understand the underlying logic of functional programming, we also conduct experiments on conceptual questions. In contrast to programming exercises, which are designed to build practical skills in implementing concepts through code, conceptual questions typically focus on assessing a student's understanding of fundamental principles and theories, and they often require explanations, proofs, or high-level reasoning. We categorize the conceptual questions from midterm and final exams into five groups: Long answer, Dynamics(evaluations), Type inference, Statics(variable binding, unused variables, substitution/overshadowing), and Induction proof. Following the method described in Section 3.1, we input the model with exam questions and repeat the process 5 times. Here, we explicitly specify that the questions are related to OCaml. Additionally, for solutions that require a specific type of structure, we provide an example to guide the model as it otherwise lacks prior knowledge of the required format. 
+
+
+
+
+For this part, we will grade the solutions returned by LLMs using the \textit{General CS Grading rubrics} from the university. The rubrics include \textit{Strategy}, \textit{Correctness}, and \textit{Communication}. We have used four performance standards for each criterion:  \textit{Mastery},  \textit{Proficient}, \textit{Developing}, and \textit{Beginning}. 
+
+
+
+\begin{enumerate}
+	\item Mastery: This level signifies exceptional performance that meets or exceeds all
+	expectations. The model demonstrates a thorough and deep understanding of the
+	material, showing excellent problem-solving skills, clear and precise communication, and
+	high-quality work that is virtually error-free.
+	
+	\item Proficient: This level indicates strong performance that meets most expectations. The
+	model shows a good understanding of the material, with minor errors or omissions. Work
+	is generally well-executed, with clear communication and solid problem-solving skills.
+	
+	\item Developing: This level represents performance that meets some expectations but requires improvement. The model demonstrates a basic understanding of the material but may have notable errors, omissions, or misunderstandings. Work shows an attempt at clear communication and problem-solving but lacks completeness or accuracy.
+	
+	\item Beginning: This level reflects performance that does not meet expectations. The model struggles to understand the material, resulting in significant errors and a lack of clarity in communication and problem-solving. Work is often incomplete, inaccurate, or poorly executed.
+\end{enumerate}
+
+
+
+To achieve \textit{Mastery} for each criterion, the solutions must
+
+
+\begin{enumerate}
+    \item for Strategy: Articulates a clear strategy to correctly solve the problem, according to their understanding of the task at hand.
+    \item for Understanding of the problem: Demonstrates a deep understanding of the problem, identifying all key components and potential challenges.
+    \item for Communication: Provides a clear, complete, unambiguous, and concise explanation.
+\end{enumerate}
+
+Below we provide some examples to present solutions of different level performances.
+\\
+
+
+\textbf{Questions:}
+
+Fill in the most general typess in the holes below.
+
+\texttt{let rec repeat (f :  ** to be filled ** ) : (** to be filled **) = f (repeat f)}
+
+If you believe that the program is ill-typed, then indicate briefly why.
+\\
+
+
+
+\textbf{Grade: Mastery}
+
+The solution demonstrates a correct understanding of the problem by correctly identifying the most general types for the repeat function. It accurately assigns the type \texttt{'a -> 'a} to \texttt{f} and \texttt{'a} to the return type of \texttt{repeat}, clearly explaining the role of each component. The explanation is concise, precise, and effectively communicates the reasoning behind the answer.
+\\
+
+\textbf{Solution:}
+
+
+\texttt{let rec repeat (f: 'a -> 'a) : 'a = f (repeat f)}
+
+
+- \texttt{'a -> 'a}: A function that takes a value of type \texttt{'a} and returns a value of type \texttt{'a}.
+- \texttt{'a}: The return type of the repeat function.
+
+The program is well-typed.
+\\
+
+\textbf{Grade: Proficient}
+
+The solution is Proficient because it correctly identifies the most general types for the function `repeat`, stating that `f` is of type \texttt{'a} -> \texttt{'a} and the return type of `repeat` is \texttt{'a}. While the derived types are correct, the misunderstanding about type validity indicates a gap in the model's understanding of OCaml's type system. The explanation is otherwise clear and concise but includes the erroneous claim about ill-typedness, preventing it from achieving Mastery.
+\\
+
+\textbf{Solution:}
+
+
+\texttt{let rec repeat (f: 'a -> 'a) : 'a = f (repeat f)}
+
+
+This is ill-typed because it creates an infinite recursive type. The function tries to recursively apply 'f' without a base case, which would cause a stack overflow or infinite recursion.
+\\
+
+\textbf{Grade: Developing}
+
+The solution demonstrates a lack of understanding of OCaml's type system and the recursive nature of the repeat function. It incorrectly assigns the type \texttt{'\_a -> '\_b} to \texttt{f} and \texttt{'\_a '\_b list} to the return type and the explanation claims the program is ill-typed due to \texttt{'\_b} being a free variable, which is not the case in OCaml. Furthermore, it introduces irrelevant and misleading comparisons to Haskell's type system, demonstrating confusion about the problem context.
+\\
+
+
+\textbf{Solution:}
+
+
+The most general types for the holes in the 'repeat' function are:
+
+\texttt{let rec repeat (f : '\_a -> '\_b) : '\_a '\_b list = f (repeat f)}
+
+This program is ill-typed. The 'repeat f' tries to create a recursive call to 'repeat', but since '\_b' is a free variable, this code does not have a type. The 'b is expected to represent an OCaml [expression type], however OCaml does not support Haskell's general recursion over monomorphized types.\\
+
+\textbf{Grade: Beginning}
+
+The solution demonstrates a fundamental lack of understanding and clarity, failing to meet expectations. It does not provide any derived types directly and immediately claims that the program is ill-typed,  which means that the structure of the response is poorly organized, lacking the clarity and precision required to convey reasoning effectively. Also, the assertion that the type of \texttt{repeat f} is \texttt{'a} is both incomplete and incorrect.
+\\
+
+\textbf{Solution:}
+
+The program is ill-typed because the type of \texttt{repeat f} is 'a but the type of \texttt{f (repeat f)} is ('a -> 'b) where 'b is unknown.\\
+
+
 
