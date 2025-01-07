@@ -12,7 +12,45 @@
 
 % By conducting these evaluations, we aimed to gain insights into the strengths and limitations of different LLMs in both error correction and program generation tasks, particularly in the context of teaching statically typed functional programming languages like OCaml.
 
+\subsection{Course Design}
 
+Our study concerns students in a second-year undergraduate computer science course at X\footnote{The name is intentionally anonymized for the double-blind review.} university. The course introduces concepts about functional programming and programming paradigms. It is offered every semester with about 250-300 registered undergraduate students. In this study, we use assignments from Fall 2022 and exam questions from Fall 2024.
+
+The course has seven weekly programming assignments each worth 1\% (except that the last one worth 3\%), two midterm exam each worth 13\% and 20\%, and a final exam worth 45\% of the total grade. Table \ref{overview} presents a brief overview of the course content and related homework assignments. Each homework consists of several programming tasks to implement functions and test cases. All homework assignments were hosted on Learn-OCaml, an online programming platform for OCaml that allows students to edit, compile, test, and debug code all in one place. We used a modified version of Learn-OCaml \cite{10.1145/3341719} by Hameer and Pientka with additional features such as style checking and evaluation of test cases written by students.
+
+\begin{table}[h!]
+	% \begin{adjustbox}{scale=0.8}
+		\begin{tabular}{|l | l | c | l |} 
+			
+			\hline
+			Week & Topics & HW\# \  \\ [0.3ex] 
+			\hline
+			1-2 & Basics, recursion and pattern-matching & 1\\ 
+			\hline
+			3 & Induction proof and reasoning about programs & 2\\ 
+			\hline
+			4 & Higher-order function & 3\\ 
+			\hline
+			5 & Midterm1  & \\ 
+			\hline
+			6 & Programming with State (References) and Mutable Data& 4\\ 
+			\hline
+			7-8 & Continuations and Exceptions  & 4\\ 
+			\hline
+			9 & Midterm2& \\ 
+			\hline
+			10 & Lazy programming & 5\\ 
+			\hline
+			11 & Syntax of a language Static Semantics and Operational Semantics& 6\\ 
+			\hline
+			12 & Type inference  & 7\\ 
+			\hline
+		\end{tabular}
+	% \end{adjustbox}
+	\caption{\label{overview}Overview of course schedule.}
+\end{table}
+
+\subsection{Experiment set-up}
 
 
 Under the subsections below, we elaborate on our methodology. Section 3.1 gives details about how we evaluate LLMs in generating solutions for programming questions, as well as how LLMs perform in repairing the buggy codes selected from student homework. The assignment questions consist of 10 homework from fall 2022. Section 3.2 describes how we classify the conceptual questions chosen from the midterm and final exams into various categories and then feed into LLMs as well. We interact with all of the LLMs via OpenAI and OpenRouter APIs.
